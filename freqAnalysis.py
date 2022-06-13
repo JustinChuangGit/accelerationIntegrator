@@ -12,7 +12,7 @@ import plotly.graph_objs as go
 
 doc = endaq.ide.get_doc('TCB.IDE')
 
-accel = endaq.ide.to_pandas(doc.channels[8].subchannels[0])
+accel = endaq.ide.to_pandas(doc.channels[8].subchannels[0], time_mode='seconds')
 
 plot(accel, 100000)
 
@@ -46,4 +46,7 @@ for c in oct_psd.columns:
       line_dash='dash'
   ))
 
+fig.show()
+
+data_df, fig = endaq.plot.octave_spectrogram(accel, window=0.15, bins_per_octave=3)
 fig.show()
