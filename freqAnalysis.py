@@ -10,10 +10,8 @@ import scipy
 from IPython.display import display
 
 
-doc = endaq.ide.get_doc('TCB.IDE')
-table = endaq.ide.get_channel_table(doc)
 
+doc = endaq.ide.get_doc('TCB.IDE')
 
 accel = endaq.ide.to_pandas(doc.channels[8].subchannels[0])
 
-print(accel)
