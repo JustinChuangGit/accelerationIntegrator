@@ -8,6 +8,7 @@ from IPython.display import display
 from plot import plotit as plot
 endaq.plot.utilities.set_theme('endaq_light')
 import plotly.graph_objs as go
+from lowessFilter import filter
 
 
 doc = endaq.ide.get_doc('TCB.IDE')
@@ -46,7 +47,9 @@ for c in oct_psd.columns:
       line_dash='dash'
   ))
 
-fig.show()
+#fig.show()
 
 data_df, fig = endaq.plot.octave_spectrogram(accel, window=1, bins_per_octave=20)
-fig.show()
+#fig.show()
+
+filter(accel)
