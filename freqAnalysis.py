@@ -48,5 +48,5 @@ for c in oct_psd.columns:
 
 fig.show()
 
-data_df, fig = endaq.plot.octave_spectrogram(accel, window=0.15, bins_per_octave=3)
+data_df, fig = endaq.plot.octave_spectrogram(accel, window=1, bins_per_octave=20)
 fig.show()
