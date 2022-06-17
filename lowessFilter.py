@@ -7,8 +7,7 @@ import statsmodels.api as sm # to build a LOWESS model
 from scipy.interpolate import interp1d # for interpolation of new data points
 
 def filter(df):
-    fig = px.scatter(df, df[df.columns[0]], df[df.columns[1]], 
-                 opacity=0.8, color_discrete_sequence=['black'])
+    fig = px.line(df, df.loc[:,'time'], df.loc[:,'X (100g)'])
 
     # Change chart background color
     fig.update_layout(dict(plot_bgcolor = 'white'))
@@ -23,7 +22,7 @@ def filter(df):
                     showline=True, linewidth=1, linecolor='black')
 
     # Set figure title
-    fig.update_layout(title=dict(text="House Price Based on Distance from the Nearest MRT", 
+    fig.update_layout(title=dict(text="Lowess Filtered Data", 
                                 font=dict(color='black')))
 
     # Update marker size
