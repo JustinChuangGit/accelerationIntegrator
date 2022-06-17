@@ -14,8 +14,10 @@ from lowessFilter import filter
 doc = endaq.ide.get_doc('TCB.IDE')
 
 accel = endaq.ide.to_pandas(doc.channels[8].subchannels[0], time_mode='seconds')
+accel['time'] = accel.index
+print(accel)
 
-plot(accel, 100000)
+#plot(accel, 100000)
 
 
 psd = endaq.calc.psd.welch(accel, bin_width=1)
@@ -52,4 +54,5 @@ for c in oct_psd.columns:
 data_df, fig = endaq.plot.octave_spectrogram(accel, window=1, bins_per_octave=20)
 #fig.show()
 
+print(accel)
 filter(accel)

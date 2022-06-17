@@ -7,7 +7,7 @@ import statsmodels.api as sm # to build a LOWESS model
 from scipy.interpolate import interp1d # for interpolation of new data points
 
 def filter(df):
-    fig = px.scatter(df, x=df['X3 distance to the nearest MRT station'], y=df['Y house price of unit area'], 
+    fig = px.scatter(df, df[df.columns[0]], df[df.columns[1]], 
                  opacity=0.8, color_discrete_sequence=['black'])
 
     # Change chart background color
