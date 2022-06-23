@@ -19,7 +19,8 @@ def retrieveData(filename):
     data = endaq.ide.to_pandas(doc.channels[8].subchannels[0], time_mode='seconds')
 
     normalData = toNormal(data)
-    averageOffset = normalData.iloc[0:1000,"X (100g)"].mean()
-    print(averageOffset)
+    averageOffset = normalData.iloc[0:5000,[0]].to_numpy()
+    averageOffset = np.median(averageOffset.T)
+    print(data-averageOffset)
 
     return data
