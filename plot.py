@@ -21,7 +21,7 @@ accel_time_labels = dict(
 def plotit(data,points):
 
     if len(data.columns) > 1:
-        del data['time']
+        del data['timestamp']
 
 
     fig = endaq.plot.plots.rolling_min_max_envelope(
