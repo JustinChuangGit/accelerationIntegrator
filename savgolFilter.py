@@ -8,7 +8,7 @@ from IPython.display import display
 def filter(data, plotBool=False, desiredPoints = 100000):
     
     data['timestamp'] = data.index
-    filtered = savgol_filter(data['X (100g)'], 1001, 3)
+    filtered = savgol_filter(data['X (100g)'], 1301, 3)
     filteredData = pd.DataFrame(filtered, data['timestamp'])
     filteredData.columns = ['X (100g)']
     display(filteredData)
