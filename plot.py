@@ -17,6 +17,12 @@ accel_time_labels = dict(
     legend_title_text=''
 )
 
+velocity_labels = dict(
+    xaxis_title_text='Time(s)',
+    yaxis_title_text='Velocity (km/h)',
+    legend_title_text=''
+)
+
 
 def plotit(data,points):
 
@@ -32,7 +38,7 @@ def plotit(data,points):
     )
 
     fig.update_layout(
-        accel_time_labels,
-        title_text='Filtered Time Series with 13M Points',
+        velocity_labels,
+        title_text='Beach Axis Velocity Plot',
     )
     fig.show()
