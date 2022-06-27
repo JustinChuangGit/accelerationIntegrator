@@ -18,5 +18,5 @@ def filter(data, plotBool=False, points = 100000):
     display(data)
 
     if plotBool == TRUE:
-        plot(data,desiredPoints)
+        plot(data,points)
     return filteredData
