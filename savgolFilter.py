@@ -5,7 +5,7 @@ from plot import plotit as plot
 from scipy.signal import savgol_filter
 from IPython.display import display
 
-def filter(data, plotBool=False, desiredPoints = 100000):
+def filter(data, plotBool=False, points = 100000):
     
     data['timestamp'] = data.index
     filtered = savgol_filter(data['X (100g)'], 1301, 3)
