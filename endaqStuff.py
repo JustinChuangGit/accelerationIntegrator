@@ -1,7 +1,6 @@
 import pandas as pd # for data manipulation
 import numpy as np # for data manipulation
 import endaq
-import math 
 from IPython.display import display
 
 
@@ -22,9 +21,16 @@ def toNormal(data):
     data = data.reset_index(drop=True)
     return data
 
-def retrieveData(filename):
+def retrieveData(filename, axes):
+    if axes == 'x':
+        subchannel = 0
+    elif axes == 'y':
+        subchannel = 1
+    elif axes == 'z':
+        subchannel = 2
+
     doc = endaq.ide.get_doc(filename)
-    data = endaq.ide.to_pandas(doc.channels[8].subchannels[0], time_mode='seconds')*9.81
+    data = endaq.ide.to_pandas(doc.channels[8].subchannels[subchannel], time_mode='seconds')*9.81
     normalData = toNormal(data)
     averageOffset = normalData.iloc[0:5000,[0]].to_numpy()
     averageOffset = np.median(averageOffset.T)
