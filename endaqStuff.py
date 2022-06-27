@@ -1,7 +1,7 @@
 import pandas as pd # for data manipulation
 import numpy as np # for data manipulation
 import endaq
-
+import math 
 from IPython.display import display
 
 
@@ -24,8 +24,7 @@ def toNormal(data):
 
 def retrieveData(filename):
     doc = endaq.ide.get_doc(filename)
-    data = endaq.ide.to_pandas(doc.channels[8].subchannels[0], time_mode='seconds')
-
+    data = endaq.ide.to_pandas(doc.channels[8].subchannels[0], time_mode='seconds')*9.81
     normalData = toNormal(data)
     averageOffset = normalData.iloc[0:5000,[0]].to_numpy()
     averageOffset = np.median(averageOffset.T)
@@ -34,7 +33,6 @@ def retrieveData(filename):
 def nearPeak(data, plusMinus):
     maxVal = abs(data['X (100g)']).max()
     maxValTime = data.index[abs(data['X (100g)'])==maxVal].tolist()
-    display(maxValTime)
     
 
 def extractSection(filename, startTime, endTime):
