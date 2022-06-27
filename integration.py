@@ -11,7 +11,7 @@ def integrateIt(data):
     t = data['timestamp'].to_numpy()
     y = data['X (100g)'].to_numpy()
 
-    y_int = integrate.cumtrapz(y, t, initial=0)
+    y_int = (integrate.cumtrapz(y, t, initial=0))*3.6
     
     final = createDf(t,y_int,'endaq')
     return final
