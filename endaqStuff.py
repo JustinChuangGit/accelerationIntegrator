@@ -23,7 +23,7 @@ def toNormal(data):
     return data
 
 def retrieveData(filename):
-    doc = endaq.ide.get_doc('TCB.IDE')
+    doc = endaq.ide.get_doc(filename)
     data = endaq.ide.to_pandas(doc.channels[8].subchannels[0], time_mode='seconds')
 
     normalData = toNormal(data)
@@ -33,6 +33,12 @@ def retrieveData(filename):
 
 def nearPeak(data, plusMinus):
     maxVal = abs(data['X (100g)']).max()
-    temp = data.index[abs(data['X (100g)'])==maxVal].tolist()
-    display(temp)
+    maxValTime = data.index[abs(data['X (100g)'])==maxVal].tolist()
+    display(maxValTime)
+    
 
+def extractSection(filename, startTime, endTime):
+    startTime = str(startTime) + 's'
+    endTime = str(endTime) + 's'
+    extractedData = endaq.ide.extract_time(filename, out = 'extracted.ide', start = startTime, end = endTime)
+    return endaqDf(retrieveData('extracted.ide'))
