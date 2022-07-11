@@ -45,4 +45,4 @@ def extractSection(filename, startTime, endTime):
     startTime = str(startTime) + 's'
     endTime = str(endTime) + 's'
     extractedData = endaq.ide.extract_time(filename, out = 'extracted.ide', start = startTime, end = endTime)
-    return endaqDf(retrieveData('extracted.ide'))
+    return endaqDf(retrieveData('extracted.ide','x'))

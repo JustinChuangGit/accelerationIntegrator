@@ -7,28 +7,32 @@ import scipy
 from IPython.display import display
 endaq.plot.utilities.set_theme('endaq_light')
 import plotly.graph_objs as go
-from savgolFilter import filter
+from savgolFilter import filterX, filterZ
 import statsmodels.api as sm
 
 from endaqStuff import toNormal, endaqDf, retrieveData, createDf, nearPeak, extractSection
-from integration import integrateIt
+from integration import integrateX, integrateZ
 from plot import plotit as plot
 from scipy.signal import savgol_filter
 
+filename = "test2.IDE"
+plotPoints = 100000
 
+accelX = retrieveData(filename,'x')
+accelZ = retrieveData(filename,'z')
 
-accel = retrieveData("TCB.IDE")
-plot(accel,100000)
-#nearPeak(accel, 1.0)
+filteredDataX = filterX(accelX, plotBool = True, points = plotPoints)
 
-
-accel = extractSection('TCB.IDE', 120, 140)
-plot(accel,10000)
-#filteredData = filter(accel, plotBool = True)
-
-# velocity = integrateIt(filteredData)#
+velocityX = integrateX(filteredDataX)
 
 
 
+startInput = input("Enter Start Time")
+endInput = input("Enter End Time")
 
-# plot(velocity,100000)
+accel = extractSection(filename, startInput, endInput)
+filteredData = filterX(accel, plotBool = True, points = plotPoints)
+filteredDataColumn = filteredData.rename(columns= {'X (100g)': 'Y (100g)'})
+velocity = integrateX(filteredData)
+accelAndVel = toNormal(velocity.join(filteredDataColumn))
+plot(accelAndVel,plotPoints)
